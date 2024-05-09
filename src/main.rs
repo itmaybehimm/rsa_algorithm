@@ -11,6 +11,11 @@ enum SubCommand {
     GenKeys,
     #[structopt(about = "Encrypt message")]
     EncryptMessage { message: String, public_key: String },
+    #[structopt(about = "Encrypt message")]
+    DecryptMessage {
+        message: String,
+        private_key: String,
+    },
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -27,6 +32,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         } => {
             println!("Encrpyting...");
             rsa_algorithm::encrpyt(message, public_key)?;
+            Ok(())
+        }
+        SubCommand::DecryptMessage {
+            message,
+            private_key,
+        } => {
+            println!("Decrypting...");
+            rsa_algorithm::decrpyt(message, private_key)?;
             Ok(())
         }
     }
