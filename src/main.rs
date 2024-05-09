@@ -14,7 +14,8 @@ enum SubCommand {
     #[structopt(about = "Encrypt message")]
     DecryptMessage {
         message: String,
-        private_key: String,
+        private_key_path: String,
+        prime_path: String,
     },
 }
 
@@ -36,10 +37,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
         SubCommand::DecryptMessage {
             message,
-            private_key,
+            private_key_path,
+            prime_path,
         } => {
             println!("Decrypting...");
-            rsa_algorithm::decrpyt(message, private_key)?;
+            rsa_algorithm::decrpyt(message, private_key_path, prime_path)?;
+
             Ok(())
         }
     }

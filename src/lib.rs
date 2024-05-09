@@ -14,7 +14,11 @@ pub fn encrpyt(message: String, public_key: String) -> Result<(), Box<dyn Error>
     Ok(())
 }
 
-pub fn decrpyt(message: String, private_key: String) -> Result<(), Box<dyn Error>> {
-    decrpyt::decrpyt(message, private_key)?;
+pub fn decrpyt(
+    message: String,
+    private_key_path: String,
+    primes_path: String,
+) -> Result<(), Box<dyn Error>> {
+    decrpyt::decrpyt(message, private_key_path, primes_path)?;
     Ok(())
 }

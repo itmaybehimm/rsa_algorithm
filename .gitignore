@@ -1,2 +1,8 @@
 /target
 keys.txt
+jp.py
+primes.txt
+private_key.txt
+public_key.txt
+encoded.txt
+decoded.txt
