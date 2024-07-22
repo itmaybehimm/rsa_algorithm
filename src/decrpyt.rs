@@ -2,7 +2,7 @@ use num_bigint::BigUint;
 use num_traits::{Num, One, Zero};
 use std::error::Error;
 use std::fs::File;
-use std::io::Read;
+use std::io::{Read, Write};
 
 use std::ops::Rem;
 pub fn decrpyt(
@@ -44,6 +44,8 @@ pub fn decrpyt(
     let p = prime_parts[0].clone();
     let q = prime_parts[1].clone();
 
+    let mut file = File::create("decoded.txt")?;
+
     let mut decoded_message = Vec::new();
     for number in message.iter() {
         let decoded_byte = crt(number, &d, &n, &p, &q);
@@ -55,8 +57,9 @@ pub fn decrpyt(
         let mut vec = Vec::new();
         vec.push(parsed_byte);
         let x = String::from_utf8(vec)?;
-        print!("{}", x);
+        file.write(x.as_bytes())?;
     }
+    println!("Created decoded.txt: ");
     Ok(())
 }
 
